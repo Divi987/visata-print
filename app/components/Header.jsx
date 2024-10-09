@@ -1,3 +1,4 @@
+'use client'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
@@ -7,14 +8,30 @@ import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
 import Image from 'next/image';
 import LogoSm from '../../public/images/logo-sm.png'
 import LogoLg from '../../public/images/logo-lg.png'
+import Navbar from './Navbar';
+import { useState } from 'react';
 
 export default function Header () {
+    const  [isClicked, setIsClicked ] = useState(false);
+
+    const handleClick = () => {
+        setIsClicked(!isClicked);
+    }
+
     return (
-        <div className='p-[10px] md:px-2 lg:px-4 lg:pt-8'>
+        <>
+        <div className='p-[10px] md:px-2 lg:px-4 lg:pt-8 shadow-[0_0_10px_#d3d3d3]'>
             <div className="md:px-3 md:py-4 flex justify-between items-center ">
                 <div className="m-left flex ">
                     <div className="m-hamburger px-[10px] lg:hidden">
+                    <button type="button" onClick={handleClick}>
                         <MenuIcon />
+                        {/* {
+                            isClicked ? (<MenuIcon />)
+                            : (<MenuIcon />)
+                        } */}
+                    </button>
+                        {/* <MenuIcon /> */}
                     </div>
                     <div className="m-searchIcon md:hidden">
                         <SearchIcon />
@@ -41,11 +58,11 @@ export default function Header () {
                         <ContactSupportOutlinedIcon />
                     </div>
 
-                    <div className="m-searchIcon lg:ml-4 ">
+                    <div className="m-searchIcon lg:ml-4 hidden lg:block">
                         <FolderOpenOutlinedIcon />
                     </div>
 
-                    <div className="m-searchIcon lg:ml-4 ">
+                    <div className="m-searchIcon lg:ml-4 hidden lg:block">
                         <PersonOutlineOutlinedIcon />
                     </div>
                    
@@ -54,6 +71,8 @@ export default function Header () {
                     </div>
                 </div>
             </div>
+            <Navbar clicked={isClicked} handleClick={handleClick} />
         </div>
+        </>
     )
 }
