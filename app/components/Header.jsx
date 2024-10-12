@@ -26,12 +26,7 @@ export default function Header () {
                     <div className="m-hamburger px-[10px] lg:hidden">
                     <button type="button" onClick={handleClick}>
                         <MenuIcon />
-                        {/* {
-                            isClicked ? (<MenuIcon />)
-                            : (<MenuIcon />)
-                        } */}
                     </button>
-                        {/* <MenuIcon /> */}
                     </div>
                     <div className="m-searchIcon md:hidden">
                         <SearchIcon />
