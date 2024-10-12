@@ -142,7 +142,7 @@ export default function Navbar({ clicked, handleClick }) {
 
 
       </div>
-      <div className={`lg:hidden ${clicked ? style.navv : "bg-transparent"}`}></div>
+      <div className={`lg:hidden ${clicked ? style.navv : "bg-transparent"}`} onClick={handleClick}></div>
     </>
   );
 }
