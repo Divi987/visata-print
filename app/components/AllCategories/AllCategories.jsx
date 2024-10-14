@@ -1,5 +1,7 @@
+'use client'
 import AllCategory from "./AllCategory";
 import style from "../navbarStyles.module.css";
+import { useState } from "react";
 
 export default function AllCategories() {
   let items = {
@@ -34,6 +36,21 @@ export default function AllCategories() {
       },
     ],
   };
+
+  let [current, setCurrent] = useState(0);
+
+//   Use page % instead of items length
+  let previousSlide = () => {
+    if (current === 0) setCurrent(items.item.length - 5);
+    else setCurrent(current - 1);
+  };
+
+  let nextSlide = () => {
+    if (current === items.item.length - 5) setCurrent(0);
+    else setCurrent(current + 1);
+  };
+
+
   return (
     <div className="mb-11 lg:mb-14">
       <div className="lg:p-[50px] relative">
@@ -44,6 +61,8 @@ export default function AllCategories() {
         </div>
         <div className="flex space-x-4 overflow-x-scroll overscroll-x-none no-scrollbar">
           <button
+            disabled={current === 0}
+            onClick={previousSlide}
             type="button"
             className="absolute top-0 start-0 left-2 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
           >
@@ -66,8 +85,10 @@ export default function AllCategories() {
               <span className="sr-only">Previous</span>
             </span>
           </button>
-          <AllCategory items={items.item} />
+          <AllCategory items={items.item} current={current} />
           <button
+          disabled={current === (items.item.length -1)}
+          onClick={nextSlide}
             type="button"
             className="absolute top-0 end-0 right-2 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
           >
