@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model SiteSetting {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  siteName String
+  siteLogo String
+  description String?
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  username String
+  email String
+  phoneNo String?
+  password String
+  address String?
+  cart String[]
+  wishlist String[]
+  recentlyViewedProducts String[]
+  createdBy String
+  updatedBy String
+  deletedBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  deletedAt DateTime?
+  Cart Cart[]
+  Invoice Invoice []
+}
+
+model Cart {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+  product Product @relation(fields: [productId], references: [id])
+  productId String @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+}
+
+model Category {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  image String
+  video String
+  isFeatured Boolean
+  subCategory SubCategory[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+}
+
+model SubCategory {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  image String
+  video String
+  isFeatured Boolean
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String @db.ObjectId
+  subSubCategory SubSubCategory[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+}
+
+model SubSubCategory {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  image String
+  video String
+  isFeatured Boolean
+  subCategory SubCategory @relation(fields: [subCategoryId], references: [id])
+  subCategoryId String @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+}
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  category String
+  subCategory String?
+  subSubCategory String?
+  name String
+  description String?
+  price Int
+  discount Int?
+  discountedPrice Int?
+  colors String[]
+  features String[]
+  FAQs FAQ[]
+  rating Rating[]
+  numberOfRaters Int?
+  image String?
+  video String?
+  isBestSeller Boolean @default(false)
+  isNewArrival Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+
+  Cart Cart[]
+}
+
+model Order {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
+  cart String
+  totalCost Int
+  discount Int?
+  discountedAmount Int?
+  tax Int?
+  taxableAmount Int?
+  amountToPay Int
+  paymentStatus String?
+  shippingStatus String?
+  shipToAddress String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+}
+
+model Invoice {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+  orderId String
+  systemRef String
+  gatewayRef String
+  amount Int
+  status String
+  createdAt DateTime
+  updatedAt DateTime?
+
+  transaction Transaction[]
+}
+
+model Transaction {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+  invoiceId String @db.ObjectId
+  userId String
+  orderId String
+  systemRef String
+  gatewayRef String
+  amount Int
+  status String
+  createdAt DateTime
+  updatedAt DateTime?
+}
+
+model FAQ {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+  answer String
+  product Product @relation(fields: [productId], references: [id])
+  productId String @db.ObjectId
+}
+
+model Rating {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+  rating Int
+  product Product @relation(fields: [productId], references: [id])
+  productId String @db.ObjectId
+}
+
