@@ -9,8 +9,8 @@ import GiftCategories from "./components/GiftCategories/GiftCategories";
 export default function Home() {
   return (
     <div className="">
-      <Header />
-      <BannerCarosel />
+      {/* <Header />
+      <BannerCarosel /> */}
       <HeroSection />
       <AllCategories />
       <CardsCategories />
