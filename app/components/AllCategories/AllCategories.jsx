@@ -52,7 +52,7 @@ export default function AllCategories() {
 
 
   return (
-    <div className="mb-11 lg:mb-14">
+    <div className="mb-10 lg:mb-1">
       <div className="lg:p-[50px] relative">
         <div className="text-2xl font-bold">
           <div className="p-2">

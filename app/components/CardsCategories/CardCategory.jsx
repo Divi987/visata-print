@@ -4,7 +4,7 @@ export default function CardCategory ( {items} ) {
              {items.map((item) => {
         return (
           <>
-            <figure className="flex flex-col lg:shrink-0 m-3 w-full lg:w-2/12"
+            <figure className="flex flex-col lg:shrink-0 m-3 w-full lg:w-[14%]"
             >
               <span className="bg-[#f3f3f3]  lg:overflow-hidden rounded-3xl">
                 <img src={item.img} alt="img" srcset="" className="rounded-3xl lg:rounded-none" />

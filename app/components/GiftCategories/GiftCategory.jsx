@@ -6,7 +6,7 @@ export default function GiftCategory ( {items}) {
                {items.map((item) => {
         return (
           <>
-            <figure className="flex flex-col shrink-0 m-3 w-4/12 md:w-3/12 lg:w-2/12 relative"
+            <figure className="flex flex-col shrink-0 m-3 w-4/12 md:w-3/12 lg:w-[14%] relative"
             >
                 {
                     item.discount ? 

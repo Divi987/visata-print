@@ -38,14 +38,14 @@ export default function GiftCategories () {
 
     return (
         <>
-            <div className="mb-11 lg:mb-12">
+            <div className="mb-11 lg:mb-1">
         <div className="lg:p-[50px] relative">
           <div className="text-2xl font-bold">
             <div className="p-2">
               <h2>Find holiday gifts for clients & employees</h2>
             </div>
           </div>
-          <div className="flex space-x-4 overflow-x-scroll overscroll-x-none no-scrollbar">
+          <div className="flex space-x-4 overflow-x-scroll overscroll-x-none no-scrollbar gap-4">
             <GiftCategory items={items.item} />
           </div>
         </div>

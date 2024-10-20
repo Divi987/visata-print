@@ -5,7 +5,7 @@ export default function AllCategory({ items, current }) {
       {items.map((item) => {
         return (
           <>
-            <figure className="flex flex-col shrink-0 rounded-full bg-red m-2 w-3/12 md:w-2/12 lg:w-2/12"
+            <figure className="flex flex-col shrink-0 rounded-full bg-red m-2 w-3/12 md:w-2/12 lg:w-[14%]"
             style={{
                 transform: `translateX(-${current * 100}%)`,
               }}
