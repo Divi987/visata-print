@@ -79,9 +79,6 @@ model Category {
 
 model Product {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  category String
-  subCategory String?
-  subSubCategory String?
   name String
   description String?
   price Int
