@@ -5,7 +5,7 @@ export function successResponseHandler(data = null)
     return NextResponse.json({
         status: 'success',
         data
-    });
+    }, {status: 200});
 }
 
 export function errorResponseHandler(message)
@@ -13,6 +13,5 @@ export function errorResponseHandler(message)
     return NextResponse.json({
         status: 'error',
         message,
-        data: null
-    });
+    }, {status: 500});
 }

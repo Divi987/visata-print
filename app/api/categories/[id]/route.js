@@ -1,10 +1,6 @@
-// import dbConn from '@/utils/dbConn';
-import {PrismaClient} from '@prisma/client';
-const prisma = new PrismaClient();
-
+import dbConn from "@/utils/dbConn";
+import Category from "@/models/Category"
 import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
-import mongoose from 'mongoose';
-const ProductCategoryModel = mongoose.models.ProductCategory || require('../../../../models/ProductCategory');
 
 /*
  *  Note the successResponseHandler and errorResponseHandler functions are reusable response handlers I am importing from a utility class.
@@ -14,11 +10,7 @@ export async function GET(request, {params}) {
     try {
         const {id} = params;
 
-        const category = await prisma.category.findUnique({
-           where: {
-               id: id
-           }
-        });
+        const category = await Category.findById(id);
 
         return successResponseHandler(category);
     } catch(error){

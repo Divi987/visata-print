@@ -1,28 +1,22 @@
-import dbConn from '@/utils/dbConn';
-const ProductCategoryModel = require('../../../models/ProductCategory');
+import dbConn from "@/utils/dbConn";
+import Category from "@/models/Category"
+import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
 
 export async function GET() {
     try {
-        const categories = await ProductCategoryModel.find();
+        const categories = await Category.find();
 
-        return Response.json({
-            status: 'success',
-            data: categories,
-        });
-    } catch(error){
-        return new Response.json({
-            status: 'error',
-            message: error.message,
-            data: null
-        });
+        return successResponseHandler(categories);
+    } catch(error) {
+        return errorResponseHandler(error.message);
     }
 }
 
-export async function POST(req, res) {
-    const body = await req.json();
+export async function POST(request) {
+    const body = await request.json();
 
     try {
-        const category = new ProductCategoryModel({
+        const category = new Category({
             name: body.name,
             description: body.description,
             image: body.image ?? null,
@@ -37,15 +31,8 @@ export async function POST(req, res) {
 
         await category.save();
 
-        return Response.json({
-                status: 'success',
-                data: category ?? null
-            });
-    } catch(error){
-        return new Response.json({
-                status: 'error',
-                message: error.message,
-                data: null
-        });
+        return successResponseHandler(category);
+    } catch(error) {
+        return errorResponseHandler(error.message);
     }
 }
