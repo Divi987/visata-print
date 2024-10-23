@@ -4,7 +4,7 @@ export function successResponseHandler(data = null)
 {
     return NextResponse.json({
         status: 'success',
-        data
+        data: data ?? "Resource not found"
     }, {status: 200});
 }
 
