@@ -1,4 +1,4 @@
-const {mongoose, Schema, ObjectId} = require('mongoose')
+const {mongoose, Schema} = require('mongoose')
 
 const CategorySchema = new mongoose.Schema(
     {

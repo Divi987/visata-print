@@ -7,4 +7,4 @@ const TagSchema = new mongoose.Schema(
         isFeatured: {type: Boolean, default: false},
     }, {timestamps: true});
 
-module.exports = mongoose.model('Tag', TagSchema);
+module.exports = mongoose.models.Tag|| mongoose.model('Tag', TagSchema);
