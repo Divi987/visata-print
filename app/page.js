@@ -14,7 +14,6 @@ export default function Home() {
       <HeroSection />
       <h1>Printing Web App</h1>
       <Faq />
-      <DiscountCodes />
       <Footer />
     </div>
   );
