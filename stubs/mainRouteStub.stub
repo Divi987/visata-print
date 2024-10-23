@@ -1,0 +1,24 @@
+import dbConn from "@/utils/dbConn";
+import [ROUTE_NAME_CAPITALIZED] from "@/models/[ROUTE_NAME_CAPITALIZED]"
+import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
+
+export async function GET() {
+    try {
+        const [ROUTE_NAME_LOWERCASE]s = await [ROUTE_NAME_CAPITALIZED].find({});
+
+        return successResponseHandler([ROUTE_NAME_LOWERCASE]s);
+    } catch (error) {
+        return errorResponseHandler(error.message);
+    }
+}
+
+export async function POST(request) {
+    try {
+        const body = await request.json();
+        const [ROUTE_NAME_LOWERCASE] = await [ROUTE_NAME_CAPITALIZED].create(body);
+
+        return successResponseHandler([ROUTE_NAME_LOWERCASE]);
+    } catch (error) {
+        return errorResponseHandler(error.message);
+    }
+}
