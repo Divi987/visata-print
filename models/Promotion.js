@@ -8,4 +8,4 @@ const PromotionSchema = new mongoose.Schema(
         discount: {type: Number},
     }, {timestamps: true});
 
-module.exports = mongoose.model('Promotion', PromotionSchema);
+module.exports = mongoose.models.Promotion || mongoose.model('Promotion', PromotionSchema);

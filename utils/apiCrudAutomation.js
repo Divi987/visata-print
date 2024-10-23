@@ -71,7 +71,7 @@ function capitalizeFirstLetter(string) {
 // Check if a route name was provided
 if (process.argv.length < 3) {
     console.error('❌ Please provide a route name');
-    console.log('Usage: node generate-api-route.js <routeName>');
+    console.log('Usage: node apiCrudAutomation <routeName>');
     process.exit(1);
 }
 

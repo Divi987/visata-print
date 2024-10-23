@@ -15,4 +15,4 @@ const SiteSettingSchema = new mongoose.Schema(
 
     }, {timestamps: true});
 
-module.exports = mongoose.model('SiteSetting', SiteSettingSchema);
+module.exports = mongoose.models.SiteSetting || mongoose.model('SiteSetting', SiteSettingSchema);

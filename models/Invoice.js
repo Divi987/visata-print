@@ -16,4 +16,4 @@ const InvoiceSchema = new mongoose.Schema({
     gatewayResponseCode: {type: String},
 }, {timestamps: true});
 
-module.exports = mongoose.model('Invoice', InvoiceSchema);
+module.exports = mongoose.models.Invoice || mongoose.model('Invoice', InvoiceSchema);

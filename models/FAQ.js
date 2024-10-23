@@ -5,4 +5,4 @@ const faqSchema = new mongoose.Schema({
     answer: {type: String},
 }, {timestamps: true});
 
-module.exports = mongoose.model('FAQ', faqSchema);
+module.exports = mongoose.models.FAQ || mongoose.model('FAQ', faqSchema);
