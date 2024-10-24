@@ -113,12 +113,12 @@ const Footer = () => {
           <div className="container mx-auto flex flex-col items-center justify-center space-y-6 md:flex-row flex-col-reverse md:space-y-0 md:justify-around">
             {/* Left section with legal links */}
             <div className="text-center md:text-left text-gray-400 text-sm mt-6 md:mt-0">
-              <p>
-                1.866.207.4955 <span className="mx-2">|</span>
-                <Link href="#" className="hover:text-white">Home</Link> <span className="mx-2">|</span>
-                <Link href="#" className="hover:text-white">Privacy and Cookie Policy</Link> <span className="mx-2">|</span>
-                <Link href="#" className="hover:text-white">Terms and Conditions</Link> <span className="mx-2">|</span>
-                <Link href="#" className="hover:text-white">Legal Notice</Link>
+              <p className='underline text-white'>
+                <Link href="#" className="hover:text-gray-600 mx-2">1.866.207.4955</Link>
+                <Link href="#" className="hover:text-gray-600 mx-2">Home</Link>
+                <Link href="#" className="hover:text-gray-600 mx-2">Privacy and Cookie Policy</Link>
+                <Link href="#" className="hover:text-gray-600 mx-2">Terms and Conditions</Link>
+                <Link href="#" className="hover:text-gray-600">Legal Notice</Link>
               </p>
               <p className="mt-2">
                 A CIMPRESS company © 2001-2024 VistaPrint. All rights reserved.
