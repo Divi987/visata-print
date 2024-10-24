@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter, faPinterest } from '@fortawesome/free-brands-svg-icons';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
 
@@ -42,13 +43,13 @@ const Footer = () => {
             </span>
           </h3>
           <div className={`${showHelp ? 'block' : 'hidden'} md:block mt-2 space-y-2`}>
-            <a href="#" className="text-gray-400 hover:text-white block">My Account</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Shipping</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Contact & Support</a>
-            <a href="#" className="text-gray-400 hover:text-white block">All Products</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Ideas & Advice</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Reseller Program</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Accessibility</a>
+            <Link href="#" className="text-gray-400 hover:text-white block">My Account</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Shipping</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Contact & Support</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">All Products</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Ideas & Advice</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Reseller Program</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Accessibility</Link>
           </div>
           
         </div>
@@ -68,13 +69,13 @@ const Footer = () => {
             </span>
           </h3>
           <div className={`${showCompany ? 'block' : 'hidden'} md:block mt-2 space-y-2`}>
-            <a href="#" className="text-gray-400 hover:text-white block">About Us</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Careers</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Ambassador Program</a>
-            <a href="#" className="text-gray-400 hover:text-white block">For Investors</a>
-            <a href="#" className="text-gray-400 hover:text-white block">For Media</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Sustainability</a>
-            <a href="#" className="text-gray-400 hover:text-white block">Do Not Sell or Share My Info</a>
+            <Link href="#" className="text-gray-400 hover:text-white block">About Us</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Careers</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Ambassador Program</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">For Investors</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">For Media</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Sustainability</Link>
+            <Link href="#" className="text-gray-400 hover:text-white block">Do Not Sell or Share My Info</Link>
           </div>
         </div>
 
@@ -84,10 +85,10 @@ const Footer = () => {
         {/* Left section with legal links */}
         <div className="text-center md:text-left mb-4 md:mb-0">
           <p className="text-gray-400 text-sm">1.866.207.4955 <span className="mx-2">|</span>
-            <a href="#" className="text-gray-400 hover:text-white">Home</a> <span className="mx-2">|</span>
-            <a href="#" className="text-gray-400 hover:text-white">Privacy and Cookie Policy</a> <span className="mx-2">|</span>
-            <a href="#" className="text-gray-400 hover:text-white">Terms and Conditions</a> <span className="mx-2">|</span>
-            <a href="#" className="text-gray-400 hover:text-white">Legal Notice</a>
+            <Link href="#" className="text-gray-400 hover:text-white">Home</Link> <span className="mx-2">|</span>
+            <Link href="#" className="text-gray-400 hover:text-white">Privacy and Cookie Policy</Link> <span className="mx-2">|</span>
+            <Link href="#" className="text-gray-400 hover:text-white">Terms and Conditions</Link> <span className="mx-2">|</span>
+            <Link href="#" className="text-gray-400 hover:text-white">Legal Notice</Link>
           </p>
           <p className="text-gray-400 text-sm mt-2">
             A CIMPRESS company © 2001-2024 VistaPrint. All rights reserved.
