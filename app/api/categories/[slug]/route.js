@@ -8,9 +8,9 @@ import { successResponseHandler, errorResponseHandler } from '@/utils/responseHa
  */
 export async function GET(request, {params}) {
     try {
-        const {id} = params;
+        const {slug} = params;
 
-        const category = await Category.findById(id);
+        const category = await Category.find({slug: slug});
 
         return successResponseHandler(category);
     } catch(error){
@@ -20,10 +20,10 @@ export async function GET(request, {params}) {
 
 export async function PUT(request, {params}) {
     try {
-        const {id} = params;
+        const {slug} = params;
         const body = await request.json();
 
-        const category = await Category.findOneAndUpdate({_id: id}, body, {new: true});
+        const category = await Category.findOneAndUpdate({slug: slug}, body, {new: true});
 
         return successResponseHandler(category);
     } catch(error){
@@ -33,11 +33,12 @@ export async function PUT(request, {params}) {
 
 export async function DELETE(request, {params}) {
     try {
-        const {id} = params;
+        const {slug} = params;
 
-        const category = await Category.findByIdAndDelete(id);
+        const category = await Category.find({slug: slug});
+        await category.delete();
 
-        return successResponseHandler(category);
+        return successResponseHandler(category, 'Record deleted successfully.');
     } catch(error){
         return errorResponseHandler(error.message);
     }

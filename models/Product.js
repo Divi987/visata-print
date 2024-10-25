@@ -18,6 +18,7 @@ const ProductSchema = new Schema({
     isCompanyMade: {type: Boolean, default: false},
     rating: [{type: mongoose.ObjectId, ref: 'Rating'}],
     averageRating: {type: Number},
+    slug: {type: String, unique: true},
 });
 
 module.exports = mongoose.models.Product || mongoose.model('Product', ProductSchema);

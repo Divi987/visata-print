@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server";
 
-export function successResponseHandler(data = null)
+export function successResponseHandler(data = null, message = null)
 {
     return NextResponse.json({
         status: 'success',

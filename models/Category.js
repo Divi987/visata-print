@@ -8,7 +8,7 @@ const CategorySchema = new mongoose.Schema(
             video: {type: String},
             parentId: {type: String},
             level: {type: Number},
-            slug: {type: String},
+            slug: {type: String, unique: true, required: true},
             path: {type: String},
             isFeatured: {type: Boolean, default: false},
             isTopPick: {type: Boolean, default: false},

@@ -1,6 +1,6 @@
-import dbConn from "@/utils/dbConn";
 import Category from "@/models/Category"
-import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
+import slugify from "slugify";
+import {errorResponseHandler, successResponseHandler} from '@/utils/responseHandler';
 
 export async function GET() {
     try {
@@ -16,9 +16,12 @@ export async function POST(request) {
     const body = await request.json();
 
     try {
-        const category = new Category(body);
+        if(body.name) {
+            const name = body.name +'-'+ Date.now();
+            body.slug = slugify(name, {lower: true, trim: true, replacement: '-'});
+        }
 
-        await category.save();
+        const category = await Category.create(body);
 
         return successResponseHandler(category);
     } catch(error) {
