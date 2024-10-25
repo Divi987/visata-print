@@ -1,11 +1,12 @@
 import Link from "next/link";
+import ItemDetailsQtyContainer from "./ItemDetailsQtyContainer";
 
 export default function ItemDetails() {
   return (
     <>
-      <div className="mainItems lg:flex lg:gap-4 p-2">
-        <div className="img lg:grid-cols-7 w-[75%] ">
-          <figure className="w-full rounded-lg px-2 h-full max-h-full object-cover w-full">
+      <div className="mainItems md:grid md:grid-cols-12 md:gap-4 p-2">
+        <div className="img md:col-span-7 sticky lg:top-[20px] ">
+          <figure className="w-full rounded-lg px-2 object-cover w-full">
             <img
               src="https://cms.cloudinary.vpsvc.com/images/c_scale,dpr_auto,f_auto,q_auto:best,t_productPageHeroGalleryTransformation_v2,w_auto/legacy_dam/en-us/S001823476/NPIB-24059-17Oz-Mug-Hero-001"
               alt="mainlogo"
@@ -50,7 +51,7 @@ export default function ItemDetails() {
             </ul>
           </div>
         </div>
-        <div className="rightContent lg:grid-cols-5 px-3 py-2">
+        <div className="rightContent md:col-span-5 px-3 py-2">
           <div>
             <h1 className="text-2xl font-bold mb-3">Tall Latte Mugs</h1>
             <div className="mb-3">
@@ -66,7 +67,7 @@ export default function ItemDetails() {
             <Link href="#" className="underline">See details </Link>
           </div>
           <div>
-
+            <ItemDetailsQtyContainer />
           </div>
         </div>
       </div>
