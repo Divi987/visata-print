@@ -1,11 +1,12 @@
 const {mongoose, Schema} = require('mongoose')
+import { FileSchema } from '@/models/File';
 
 const CategorySchema = new mongoose.Schema(
     {
             name: {type: String, required: true},
             description: {type: String},
-            image: {type: String},
-            video: {type: String},
+            image: {type: FileSchema},
+            video: {type: FileSchema},
             parentId: {type: String},
             level: {type: Number},
             slug: {type: String, unique: true, required: true},
