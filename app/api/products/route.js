@@ -3,12 +3,31 @@ import Product from "@/models/Product";
 import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
 import slugify from "slugify";
 import {upload} from '@/utils/fileHandler';
+import ProductCategory from "@/models/ProductCategory";
 
-export async function GET() {
-    try {
-        const products = await Product.find({});
+export async function GET(request, {params}) {
+    console.log(request, params);
+    const url = new URL(request.url, `http://${request.headers.host}`);
+    const categoryId = url.searchParams.get('categoryId');
+    const isBestSeller = url.searchParams.get('isBestSeller')
+;    try {
+        let filtered = {};
+        
+        const products = await Product.find();
+        if(categoryId !== null){
+        const productCategory = await ProductCategory.find({ categoryId }).select('productId');
+        
+        const productIds = productCategory.map((c) => c.productId);
 
-        return successResponseHandler(products);
+        filtered._id = {$in: productIds };
+        }
+        
+        if (isBestSeller !== null) {
+            filtered.isBestSeller = isBestSeller;
+        }
+        const productsC = await Product.find(filtered);
+
+        return successResponseHandler(productsC);
     } catch (error) {
         return errorResponseHandler(error.message);
     }

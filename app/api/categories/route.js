@@ -4,9 +4,21 @@ import slugify from "slugify";
 import {errorResponseHandler, successResponseHandler} from '@/utils/responseHandler';
 import {upload} from '@/utils/fileHandler';
 
-export async function GET() {
+export async function GET(req, {params}) {
     try {
-        const categories = await Category.find({});
+        const url = new URL(req.url, `http://${req.headers.host}`);
+        const parentId = url.searchParams.get('parentId');
+
+            let filtered;
+            if (parentId) {
+              // If parentId is specified, filter by that specific parentId
+              filtered = { parentId };
+            } else {
+              // If parentId is null or an empty string, filter for categories with empty, null, or undefined parentId
+              filtered = { $or: [{ parentId: null }, { parentId: "" }, { parentId: { $exists: false } }] };
+            }
+
+        const categories = await Category.find(filtered);
 
         return successResponseHandler(categories);
     } catch(error) {
