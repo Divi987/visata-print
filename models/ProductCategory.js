@@ -6,4 +6,4 @@ const ProductCategorySchema = new mongoose.Schema({
     orderId: {type: Schema.Types.ObjectId, ref: 'Order'},
 }, {timestamps: true});
 
-module.exports = mongoose.model('ProductCategory', ProductCategorySchema);
+module.exports = mongoose.models.ProductCategory || mongoose.model('ProductCategory', ProductCategorySchema);
