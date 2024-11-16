@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import BannerCarosel from "./components/BannerCarosel";
 import RecoilRootWrapper from "./RecoilRootWrapper";
+import Footer from "./components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
           <Header />
           <BannerCarosel />
           {children}
+          <Footer />
         </RecoilRootWrapper>
       </body>
     </html>
