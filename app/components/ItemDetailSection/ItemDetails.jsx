@@ -3,7 +3,8 @@ import ItemDetailsQtyContainer from "./ItemDetailsQtyContainer";
 import Image from "next/image";
 import ELearn from '../../../public/images/E-Learn.jpg'
 
-export default function ItemDetails() {
+export default function ItemDetails({ slug, data}) {
+  
   return (
     <>
       <div className="mainItems md:grid md:grid-cols-12 md:gap-4 p-2">
