@@ -1,10 +1,12 @@
+'use client'
+
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header";
 import BannerCarosel from "./components/BannerCarosel";
 import RecoilRootWrapper from "./RecoilRootWrapper";
 import Footer from "./components/Footer";
-import HomeLayout from "./homeLayout";
+import { usePathname } from "next/navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,18 +24,16 @@ export const metadata = {
   description: "Vista Print",
 };
 
-export default function RootLayout({ children }) {
+export default function HomeLayout({ children }) {
+  const pathname = usePathname();
+
+  const isEditorRoute = pathname.startsWith("/editor/");
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <RecoilRootWrapper>
-        <HomeLayout>
+    <>
+          {!isEditorRoute && <Header /> }
+          {!isEditorRoute && <BannerCarosel /> }
           {children}
-          </HomeLayout>
-        </RecoilRootWrapper>
-      </body>
-    </html>
+          {!isEditorRoute && <Footer /> }
+    </>
   );
 }
