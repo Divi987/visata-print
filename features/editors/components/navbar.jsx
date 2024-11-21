@@ -1,9 +1,58 @@
+'use client'
+import { Hint } from "@/components/hint";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/util";
+import { useMutationState } from "@tanstack/react-query";
+import { 
+    ChevronDown, 
+    Download, 
+    Loader, 
+    MousePointerClick, 
+    Redo2, 
+    Undo2
+  } from "lucide-react";
+  import { CiFileOn } from "react-icons/ci";
+  import { BsCloudCheck, BsCloudSlash } from "react-icons/bs";
+import { useFilePicker } from "use-file-picker";
+import { Logo } from "./logo";
+
 export const Navbar =({
     id,
     editor,
     activeTool,
     onChangeActiveTool,
   }) => {
+    const data = {
+        id: 1
+    } 
+    // useMutationState({
+    //     filters: {
+    //       mutationKey: ["project", { id }],
+    //       exact: true,
+    //     },
+    //     select: (mutation) => mutation.state.status,
+    //   });
+
+    const currentStatus = data[data.length - 1];
+
+    const isError = currentStatus === "error";
+    const isPending = currentStatus === "pending";
+  
+    const { openFilePicker } = useFilePicker({
+      accept: ".json",
+      onFilesSuccessfullySelected: ({ plainFiles }) => {
+        if (plainFiles && plainFiles.length > 0) {
+          const file = plainFiles[0];
+          const reader = new FileReader();
+          reader.readAsText(file, "UTF-8");
+          reader.onload = () => {
+            editor?.loadJson(reader.result );
+          };
+        }
+      },
+    });
     return (
         <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
           <Logo />
@@ -145,7 +194,7 @@ export const Navbar =({
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <UserButton />
+              {/* <UserButton /> */}
             </div>
           </div>
         </nav>
