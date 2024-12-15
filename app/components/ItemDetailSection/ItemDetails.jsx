@@ -75,8 +75,7 @@ export default function ItemDetails({ slug, data}) {
             <Link href="#" className="underline">See details </Link>
           </div>
           <div>
-            <ItemDetailsQtyContainer />
-            <ItemDetailsQtyContainer />
+            <ItemDetailsQtyContainer id={slug} />
           </div>
         </div>
       </div>

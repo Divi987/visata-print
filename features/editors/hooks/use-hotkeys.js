@@ -1,4 +1,4 @@
-import { fabric } from "fabric";
+import * as fabric from "fabric";
 import { useEvent } from "react-use";
 
 export const useHotkeys = ({ canvas, undo, redo, save, copy, paste }) => {

@@ -23,9 +23,9 @@ export default function Carousel({ slides }) {
             transform: `translateX(-${current * 100}%)`,
           }}
         >
-          {slides.map((s) => {
+          {slides.map((s,i) => {
             return (
-              <div className="relative text-white w-full min-w-[100%]">
+              <div className="relative text-white w-full min-w-[100%]" key={i}>
                 <p className="text-white text-center">{s}</p>
               </div>
             );

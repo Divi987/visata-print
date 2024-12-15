@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 
 // import { 
 //   FaBold, 
@@ -7,21 +7,21 @@
 //   FaUnderline
 // } from "react-icons/fa";
 // import { TbColorFilter } from "react-icons/tb";
-// import { BsBorderWidth } from "react-icons/bs";
-// import { RxTransparencyGrid } from "react-icons/rx";
-// import { 
-//   ArrowUp, 
-//   ArrowDown, 
-//   ChevronDown, 
+import { BsBorderWidth } from "react-icons/bs";
+import { RxTransparencyGrid } from "react-icons/rx";
+import { 
+  ArrowUp, 
+  ArrowDown, 
+  ChevronDown, 
 //   AlignLeft, 
 //   AlignCenter, 
 //   AlignRight,
-//   Trash,
+  Trash,
 //   SquareSplitHorizontal,
 //   Copy
-// } from "lucide-react";
+} from "lucide-react";
 
-// import { isTextType } from "@/features/editors/utils";
+import { isTextType } from "@/features/editors/utils";
 // import { FontSizeInput } from "@/features/editors/components/font-size-input";
 // import { 
 //   ActiveTool, 
@@ -30,9 +30,9 @@
 //   FONT_WEIGHT
 // } from "@/features/editors/types";
 
-// import { cn } from "@/lib/util";
-// import { Hint } from "@/components/hint";
-// import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/util";
+import { Hint } from "@/components/hint";
+import { Button } from "@/components/ui/button";
 
 // export const Toolbar = ({
 //   editor,
@@ -446,6 +446,137 @@
 //   );
 // };
 
-export const Toolbar = () => {
-  return <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">Toolbar</div>;
+export const Toolbar = ({ editor, activeTool, onChangeActiveTool }) => {
+  // return <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">Toolbar</div>;
+  // const selectedObject = editor?.canvas.getActiveObject();
+  // const getProperty = (property) => {
+  //   if (!selectedObject) return null;
+  //   return selectedObject.get(property);
+  // };
+
+  // const fillColor = getProperty('fill');
+  // const [properties, setProperties] = useState({ fillColor });
+
+  // const fillColor = editor?.fillColor;
+  const fillColor = editor?.getActiveFillColor();
+  const strokeColor = editor?.getActiveStrokeColor();
+  const fontFamily = editor?.getActiveFontFamily();
+
+  const selectedObjectType = editor?.selectedObjects[0]?.type;
+  const isText = isTextType(selectedObjectType);
+
+  if (editor?.selectedObjects.length === 0) {
+    return <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2" />;
+  }
+
+  return (
+    <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Color" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool('fill')}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === 'fill' && 'bg-gray-100')}
+          >
+            <div
+              aria-hidden
+              className="rounded-sm size-4 border"
+              style={{
+                // backgroundColor: typeof fillColor === 'string' ? fillColor : 'black',
+                backgroundColor: fillColor,
+              }}
+            />
+          </Button>
+        </Hint>
+      </div>
+
+      {!isText && ( <div className="flex items-center h-full justify-center">
+        <Hint label="Stroke Color" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool('stroke-color')}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === 'stroke-color' && 'bg-gray-100')}
+          >
+            <div
+              aria-hidden
+              className="rounded-sm size-4 border-2 bg-white"
+              style={{
+                borderColor: strokeColor,
+              }}
+            />
+          </Button>
+        </Hint>
+      </div>
+    )}
+
+{!isText && ( <div className="flex items-center h-full justify-center">
+        <Hint label="Stroke Width" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool('stroke-width')}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === 'stroke-width' && 'bg-gray-100')}
+          >
+            <BsBorderWidth className="size-4" />
+          </Button>
+        </Hint>
+      </div> )}
+
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="Font" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool('font')}
+              size="sm"
+              variant="ghost"
+              className={cn(activeTool === 'font' && 'bg-gray-100')}
+            >
+              <div className="max-w-[100px] truncate">{fontFamily}</div>
+              <ChevronDown className="size-4 ml-2 shrink-0" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Bring Forward" side="bottom" sideOffset={5}>
+          <Button onClick={() => editor?.bringForward()} size="icon" variant="ghost">
+            <ArrowUp className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Send Backwards" side="bottom" sideOffset={5}>
+          <Button onClick={() => editor?.sendBackwards()} size="icon" variant="ghost">
+            <ArrowDown className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Opacity" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool('opacity')}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === 'opacity' && 'bg-gray-100')}
+          >
+            <RxTransparencyGrid className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Delete" side="bottom" sideOffset={5}>
+          <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
+            <Trash className="size-4 text-destructive" />
+          </Button>
+        </Hint>
+      </div>
+
+    </div>
+  );
 };

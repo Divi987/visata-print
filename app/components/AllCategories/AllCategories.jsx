@@ -1,11 +1,11 @@
 'use client'
+import { useState } from "react";
 import AllCategory from "./AllCategory";
 import style from "../navbarStyles.module.css";
 // import { useEffect, useState } from "react";
 import { useRecoilValueLoadable } from "recoil";
 import { categoryStateSelector } from "@/lib/recoil/selectors/selectors";
 import { fetchCategories } from "@/lib/api/fetchRequest";
-import { useState } from "react";
 
 export default function AllCategories() {
   const categoriesLoadable = useRecoilValueLoadable(categoryStateSelector);

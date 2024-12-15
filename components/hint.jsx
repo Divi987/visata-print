@@ -3,15 +3,15 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/t
   export const Hint = ({
     label,
     children,
-    side,
     align,
+    side,
+    alignOffset,
     sideOffset,
-    alignOffset
   }) => {
     return (
       <TooltipProvider>
         <Tooltip delayDuration={100}>
-          <TooltipTrigger asChild>
+          <TooltipTrigger aria-label={label} asChild>
             {children}
           </TooltipTrigger>
           <TooltipContent

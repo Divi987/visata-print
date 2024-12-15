@@ -1,41 +1,42 @@
 "use client";
 
 import * as fabric from 'fabric';
-import { useCallback, useState, useRef , useEffect} from "react";
+import { act, useCallback, useState, useRef , useEffect} from "react";
 import { useEditor } from "../hooks/use-editor";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
-// import { selectionDependentTools } from "../types";
+import { selectionDependentTools } from "../types";
 // import debounce from "lodash.debounce";
-// import { ShapeSidebar } from "./shape-sidebar";
-// import { FillColorSidebar } from "./fill-color-sidebar";
-// import { StrokeColorSidebar } from "./stroke-color-sidebar";
-// import { StrokeWidthSidebar } from "./stroke-width-sidebar";
-// import { OpacitySidebar } from "./opacity-sidebar";
-// import { TextSidebar } from "./text-sidebar";
-// import { FontSidebar } from "./font-sidebar";
+import { ShapeSidebar } from "./shape-sidebar";
+import { FillColorSidebar } from "./fill-color-sidebar";
+import { StrokeColorSidebar } from "./stroke-color-sidebar";
+import { StrokeWidthSidebar } from "./stroke-width-sidebar";
+import { OpacitySidebar } from "./opacity-sidebar";
+import { TextSidebar } from "./text-sidebar";
+import { FontSidebar } from "./font-sidebar";
 // import { DrawSidebar } from "./draw-sidebar";
 // import { SettingsSidebar } from "./settings-sidebar";
 // import { TemplateSidebar } from "./template-sidebar";
 // import { FilterSidebar } from "./filter-sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
+import { ImageSidebar } from './image-sidebar';
 
-export const Editor = ({ initialData }) => {
-  const { init } = useEditor();
-//     console.log(initialData.slug);
-//     // const { mutate } = initialData.id//useUpdateProject(initialData.id);
-
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   // const debouncedSave = useCallback(
-//   //   debounce(
-//   //     (values) => {
-//   //       mutate(values);
-//   //   },
-//   //   500
-//   // ), [mutate]);
-
-//     const [activeTool, setActiveTool] = useState("select");
+export const Editor = () => {
+  //     console.log(initialData.slug);
+  //     // const { mutate } = initialData.id//useUpdateProject(initialData.id);
+  
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   // const debouncedSave = useCallback(
+    //   //   debounce(
+      //   //     (values) => {
+        //   //       mutate(values);
+        //   //   },
+        //   //   500
+        //   // ), [mutate]);
+        
+        const [activeTool, setActiveTool] = useState("select");
+        // const { init, editor } = useEditor();
 
 //     const onClearSelection = useCallback(() => {
 //         if (selectionDependentTools.includes(activeTool)) {
@@ -51,7 +52,21 @@ export const Editor = ({ initialData }) => {
 //         // saveCallback: debouncedSave,
 //       });
 
-//     const onChangeActiveTool = useCallback((tool) => {
+    const canvasRef = useRef(null);
+    const containerRef = useRef(null);
+
+    const onClearSelection = useCallback(() => {
+      if (selectionDependentTools.includes(activeTool)) setActiveTool('select');
+    }, [activeTool]);
+    
+    const onChangeActiveTool = useCallback((tool) => {
+      if (tool === activeTool) return setActiveTool('select');
+      if (tool === 'draw') {
+        // TODO: Enable draw mode
+      }
+      if (activeTool === 'draw') {
+        // TODO: Disable draw mode
+      }
 //         if (tool === "draw") {
 //           editor?.enableDrawingMode();
 //         }
@@ -64,12 +79,14 @@ export const Editor = ({ initialData }) => {
 //           return setActiveTool("select");
 //         }
         
-//         setActiveTool(tool);
-//       }, [activeTool, editor]);
-    
-      const canvasRef = useRef(null);
-      const containerRef = useRef(null);
-    
+        setActiveTool(tool);
+      }, [activeTool]);
+      // [activeTool, editor]);
+
+      const { init, editor } = useEditor({
+        clearSelectionCallback: onClearSelection,
+      });
+
       useEffect(() => {
         const canvas = new fabric.Canvas(canvasRef.current, {
           controlsAboveOverlay: true,
@@ -193,13 +210,28 @@ export const Editor = ({ initialData }) => {
     //   </div> */} -- updated from last commmit
     // </div>
     <div className="h-full flex flex-col">
-      <Navbar />
+      <Navbar activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
 
       <div className="absolute h-[calc(100%_-_68px)] w-full top-[68px] flex">
-        <Sidebar />
+        <Sidebar activeTool={activeTool} onChangeActiveTool={onChangeActiveTool}  />
+        <ShapeSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <FillColorSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <StrokeColorSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <StrokeWidthSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <OpacitySidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <TextSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <FontSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+        <ImageSidebar editor={editor} activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
+
 
         <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
-          <Toolbar />
+          
+          <Toolbar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+            key={JSON.stringify(editor?.canvas.getActiveObject())}
+          />
 
           <div className="flex-1 h-[calc(100%_-_124px)] bg-muted" ref={containerRef}>
             <canvas ref={canvasRef} />

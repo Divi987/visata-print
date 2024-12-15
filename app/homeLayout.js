@@ -4,9 +4,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header";
 import BannerCarosel from "./components/BannerCarosel";
-import RecoilRootWrapper from "./RecoilRootWrapper";
 import Footer from "./components/Footer";
 import { usePathname } from "next/navigation";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,14 +26,17 @@ export const metadata = {
 
 export default function HomeLayout({ children }) {
   const pathname = usePathname();
-
+  const queryClient = new QueryClient();
   const isEditorRoute = pathname.startsWith("/editor/");
   return (
     <>
+          <QueryClientProvider client={queryClient}>
+
           {!isEditorRoute && <Header /> }
           {!isEditorRoute && <BannerCarosel /> }
           {children}
           {!isEditorRoute && <Footer /> }
+          </QueryClientProvider>
     </>
   );
 }

@@ -1,4 +1,7 @@
-export default function ItemDetailsQtyContainer () {
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+export default function ItemDetailsQtyContainer ({ id }) {
     return (
         <div>
             <div>
@@ -136,7 +139,7 @@ export default function ItemDetailsQtyContainer () {
                     <span>Free Shipping on Order over $100</span>
                 </div>
                 <div>
-
+                    <Link href={`/editor/${id}`}>Edit Design</Link>
                 </div>
             </div>
         </div>

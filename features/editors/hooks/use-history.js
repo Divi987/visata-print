@@ -1,4 +1,4 @@
-import { fabric } from "fabric";
+import * as fabric from "fabric";
 import { useCallback, useRef, useState } from "react";
 import { JSON_KEYS } from "../types";
 

@@ -1,4 +1,4 @@
-import { fabric } from "fabric";
+import * as fabric from "fabric";
 import { useCallback, useEffect } from "react";
 
 export const useAutoResize = ({ canvas, container }) => {
@@ -16,9 +16,9 @@ export const useAutoResize = ({ canvas, container }) => {
     const zoomRatio = 0.85;
     const localWorkspace = canvas
       .getObjects()
-      .find((object) => object.name === "clip");
+      .find((object) => object.name === 'clip');
 
-    // @ts-ignore
+    // @ts-ignore util types aren't added.
     const scale = fabric.util.findScaleToFit(localWorkspace, {
       width: width,
       height: height,
@@ -42,13 +42,15 @@ export const useAutoResize = ({ canvas, container }) => {
       return;
     }
 
-    viewportTransform[4] = canvas.width / 2 - workspaceCenter.x * viewportTransform[0];
+    viewportTransform[4] =
+      canvas.width / 2 - workspaceCenter.x * viewportTransform[0];
 
-    viewportTransform[5] = canvas.height / 2 - workspaceCenter.y * viewportTransform[3];
+    viewportTransform[5] =
+      canvas.height / 2 - workspaceCenter.y * viewportTransform[3];
 
     canvas.setViewportTransform(viewportTransform);
 
-    localWorkspace.clone((cloned) => {
+    localWorkspace.clone().then((cloned) => {
       canvas.clipPath = cloned;
       canvas.requestRenderAll();
     });
@@ -72,5 +74,5 @@ export const useAutoResize = ({ canvas, container }) => {
     };
   }, [canvas, container, autoZoom]);
 
-  return { autoZoom };
+  // return { autoZoom };
 };

@@ -1,4 +1,4 @@
-import { fabric, ITextboxOptions } from "fabric";
+import * as fabric from 'fabric';
 // import { ITextboxOptions } from "fabric/fabric-impl";
 import * as material from "material-colors";
 
@@ -160,7 +160,7 @@ export const TRIANGLE_OPTIONS = {
 };
 
 export const TEXT_OPTIONS = {
-  type: "textbox",
+  // type: "Textbox",
   left: 100,
   top: 100,
   fill: FILL_COLOR,

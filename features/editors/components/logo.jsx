@@ -5,14 +5,15 @@ import LogoLg from '../../../public/images/logo-sm.png'
 export const Logo = () => {
   return (
     <Link href="/">
-      <div className="size-[3rem] relative shrink-0">
+      <div className="size-[2rem] bg-dark relative shrink-0">
         <Image
-          src='/images/logo-sm.png'
-        //   fill
+          src='/logo-sm.png'
           alt="The Canvas"
+          fill
+          sizes="auto, 100vh"
           className="shrink-0 hover:opacity-75 transition"
-          width={40}
-          height={30}
+          // width={40}
+          // height={30}
         />
       </div>
     </Link>
