@@ -1,5 +1,5 @@
 import dbConn from "@/utils/dbConn";
-import Sitesetting from "@/models/Sitesetting"
+import Sitesetting from "@/models/SiteSetting"
 import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
 
 export async function GET(request, {params}) {

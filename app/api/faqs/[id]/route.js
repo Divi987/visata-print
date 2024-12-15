@@ -1,5 +1,5 @@
 import dbConn from "@/utils/dbConn";
-import Faq from "@/models/Faq"
+import Faq from "@/models/FAQ"
 import { successResponseHandler, errorResponseHandler } from '@/utils/responseHandler';
 
 export async function GET(request, {params}) {
