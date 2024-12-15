@@ -8,6 +8,7 @@ import { categoryStateSelector } from "@/lib/recoil/selectors/selectors";
 import { fetchCategories } from "@/lib/api/fetchRequest";
 
 export default function AllCategories() {
+  let [current, setCurrent] = useState(0);
   const categoriesLoadable = useRecoilValueLoadable(categoryStateSelector);
 
   // if (categoriesLoadable.state === 'loading') return <p>Loading categories...</p>;
@@ -15,19 +16,20 @@ export default function AllCategories() {
 
   let items = categoriesLoadable.contents.data;
   
-  let [current, setCurrent] = useState(0);
+
 
 //   Use page % instead of items length
   let previousSlide = () => {
-    if (current === 0) setCurrent(items.length - 1);
-    else setCurrent(current - 1);
+    if (current === 0) {
+ 		setCurrent(items.length - 1);
+	} else { setCurrent(current - 1); }
     // if (current === 0) setCurrent(items.item.length - 5);
     // else setCurrent(current - 1);
   };
 
   let nextSlide = () => {
-    if (current === items.length - 1) setCurrent(0);
-    else setCurrent(current + 1);
+    if (current === items.length - 1) { setCurrent(0); }
+    else { setCurrent(current + 1); }
     // if (current === items.item.length - 5) setCurrent(0);
     // else setCurrent(current + 1);
   };
